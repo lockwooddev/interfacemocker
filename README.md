@@ -4,7 +4,7 @@ I use a lot of dependency injection in Golang. This repo contains a pattern to m
 
 ## Usage example
 
-When you adapt the pattern in `mocks.go`, you will be able to easily create a list of mocks that should correspond to the calls you expect in your testcase.
+When you adapt the pattern in `mocks.go`, you will be able pass an interface list of mocks that correspond to the calls you expect in your testcase. Here is a simplified example on how your mocker will roughly look like:
 
 ```golang
 package example
@@ -19,7 +19,7 @@ type mocker struct {
 	Mocks []interface{}
 }
 
-func NewMocker(mocks []interface{}) Mocker {
+func NewMocker(mocks []interface{}) DatabaseMocker {
 	return &mocker{Mocks: mocks}
 }
 
