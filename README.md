@@ -1,10 +1,10 @@
 # interfacemocker
 
-I use a lot of dependency injection in Golang. This repo contains a pattern to make your own mocker for interfaces in case you want to bypass external services like a database. The pattern specializes on mocking the return values for single or multiple object types.
+I use a lot of dependency injection in Golang. This repo contains a pattern to make your own mocker for interfaces in case you want to bypass external services like a database in tests. The pattern specializes on mocking the return values for single or multiple object types.
 
 ## Usage example
 
-When you adapt the pattern in `mocks.go`, you will be able to easily create a list of mocks that should correspond to the calls you expect in your testcase. 
+When you adapt the pattern in `mocks.go`, you will be able to easily create a list of mocks that should correspond to the calls you expect in your testcase.
 
 ```golang
 package example
