@@ -56,3 +56,4 @@ row3, err := mocker.GetRow()
 ## footnotes
 
 1. Panics are intended for testcases where your mock return value does not match the return value of the actual call. For every testcase you need to tune your mock return values.
+2. The mock returned in `getSingleMock("package.Obj")` and `getMultiMock("package.Obj")` need to match the namespace of the original package and not an import alias
