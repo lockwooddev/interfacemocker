@@ -16,6 +16,7 @@ type Mocker interface {
 	GetBar() Bar
 	GetBaz() *Baz
 	GetWaldo() (*Waldo, error)
+	GetError() error
 }
 
 type mocker struct {
@@ -47,6 +48,14 @@ func (m *mocker) GetWaldo() (*Waldo, error) {
 		return value[0].(*Waldo), nil
 	}
 	return value[0].(*Waldo), value[1].(error)
+}
+
+func (m *mocker) GetError() error {
+	value := m.getSingleMock("errors.errorString")
+	if value == nil {
+		return nil
+	}
+	return value.(error)
 }
 
 func (m mocker) checkIteration() {
@@ -98,6 +107,13 @@ func (m *mocker) getSingleMock(t string) interface{} {
 	m.checkIteration()
 
 	mock := m.Mocks[m.iter]
+
+	// don't cast nil
+	if mock == nil {
+		m.iter++
+		return mock
+	}
+
 	if strings.Contains(reflect.TypeOf(mock).String(), t) {
 		m.iter++
 		return mock

@@ -27,6 +27,8 @@ func Test_Mocker_success(t *testing.T) {
 		[]interface{}{
 			&Waldo{}, nil,
 		},
+		errors.New("test error"),
+		nil,
 	}
 	mocker := NewMocker(mocks)
 
@@ -51,6 +53,12 @@ func Test_Mocker_success(t *testing.T) {
 	r6, err := mocker.GetWaldo()
 	assert.NoError(t, err)
 	assert.Equal(t, reflect.TypeOf(r6).String(), "*interfacemocker.Waldo")
+
+	r7 := mocker.GetError()
+	assert.Equal(t, reflect.TypeOf(r7).String(), "*errors.errorString")
+
+	r8 := mocker.GetError()
+	assert.Nil(t, r8)
 }
 
 // test panic when wrong type is returned, not matching the mocks list
